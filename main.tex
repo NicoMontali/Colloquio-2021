@@ -1,4 +1,4 @@
-\documentclass[a4, 12pt, twoside,openany]{book}
+\documentclass[a4paper, 12pt, twoside,openany]{book}
 \usepackage[T1]{fontenc} %come sotto
 \usepackage[utf8]{inputenc} %aggiunge caratteri accentati
 \usepackage[italian]{babel} %lingua
@@ -6,22 +6,24 @@
 \usepackage{indentfirst} %rientro paragrafo
 \pagestyle{plain} %nessun heading o foot particolare
 \usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry} %impaginazione e margini documento
-
+%\usepackage{layaureo} %alternative layout, NECESSARIO A4PAPER IN DOCCLASS
+%GESTIONE IMMAGINI E GRAFICHE
 \usepackage{graphicx, wrapfig} %gestione immagini e grafiche
 \graphicspath{  {./images/}  } %cartella delle immagini
-
+%GESTIONE TITOLI NEL SOMMARIO
 \usepackage{tocloft} %rimuove il grassetto dall'indice
 \renewcommand{\cfttoctitlefont}{\huge\centerline}
 \renewcommand{\cftchapfont}{\large}
-
-
+%GESTIONE TITOLI PARAGRAFI E SEZIONI
 \usepackage{titlesec} %le impostazioni default del package titlesec
+%NB no punto finale nei titoli delle sezioni del corpo del testo
+
 \titleformat{\chapter}[display]
-{\normalfont\huge\filcenter}{\thechapter}{20pt}{\Huge} %ho rimosso bfseries 
-\titleformat{\section}                          %dalle voci contrassegnate
-{\normalfont\Large}{\thesection}{1em}{}         %%%qui
+{\normalfont\huge\bfseries\scshape\filcenter}{\thechapter}{20pt}{\Huge} %ho rimosso 
+\titleformat{\section}          %bfseries dalle voci contrassegnate
+{\normalfont\Large\bfseries}{\thesection}{1em}{}         %%%qui
 \titleformat{\subsection}[runin]
-{\normalfont\large}{\thesubsection}{1em}{}      %%%qui
+{\normalfont\large\itshape}{\normalfont\thesubsection}{1em}{}      %%%qui
 \titleformat{\subsubsection}[runin]
 {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
 \titleformat{\paragraph}[runin]
@@ -34,15 +36,23 @@
 \titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1em}
 \titlespacing*{\subparagraph}{\parindent}{3.25ex plus 1ex minus .2ex}{1em}
-
+%GESTIONE ASPETTO DELLE CITAZIONI ESTESE
 \usepackage[nottoc]{tocbibind} %include la voce bibliografia nell'indice
 \usepackage[autostyle,italian=guillemets]{csquotes} %rende più semplice la gestione di bibtex e permette inoltre di citare cose estese
-\usepackage[backend=biber,bibstyle=authortitle,citestyle=verbose-trad1]{biblatex}
-\addbibresource{bibliography.bib}
+%SAME
+\usepackage{etoolbox} %setta il carattere delle citazioni estese come più piccolo e rimuove il separatore verticale
+\AtBeginEnvironment{quote}{\vspace{-\topsep}\small}
+\AtEndEnvironment{quote}{\vspace{-\topsep}}
+%GESTIONE BIBLIOGRAFIA
+%\usepackage{biblatex-chicago} %ottimo pacchetto, molto ricco ma anche complicato da settare
+\usepackage[backend=biber,bibstyle=authortitle, firstinits=true,citestyle=verbose-trad1]{biblatex}
+\addbibresource{bibliography.bib} %specifica il file della bibliografia
+\renewcommand*{\newunitpunct}{\addcomma\space} %separa i campi con virgole e non con punti, come di default
+\renewcommand*{\revsdnamepunct}{} %rimuove la virgola tra nome e cognome dell'autore
 \renewcommand\mkbibnamefamily[1]{\textsc{#1}} %autori in maiuscoletto
-
-\usepackage{hyperref} %NB da caricare per ultimo, nel caso usare \phantomsection per la bibliografia
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%LINK: INTERNI ED ESTERNI AL DOCUMENTO
+%\usepackage{hyperref} %NB da caricare per ultimo, nel caso usare \phantomsection per la bibliografia
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \input{titlepage} %inserisce il frontespizio
 %\thispagestyle{empty} %sospende la numerazione della pagina
@@ -52,7 +62,7 @@
 %\thispagestyle{empty}
 
 \chapter*{Introduzione} %sospende la numerazione dei capitoli per la sezione
-\addcontentsline{toc}{chapter}{Introduzione}
+\addcontentsline{toc}{chapter}{\textsc{Introduzione}}
 \input{intro} %input permette il nesting, \include lo impedisce
 
 \chapter{Le radici del dibattito nelle scienze umane in Francia}
@@ -61,8 +71,8 @@
 \chapter{Ragione analitica e ragion dialettica}
 \input{ch2}
 
-\chapter{Gli eredi attuali}
-
+\chapter{Alcuni eredi}
+\input{ch3}
 %\bibliographystyle{siam} %questo set di comandi esclude e rimpiazza DEL TUTTO i comandi definiti come da preambolo. In caso di modifica per tornare ai comandi standard, verificare di sostituire correttamente TUTTI i componenti, sia nel preambolo che nella coda del documento.
 %\bibliography{bibliography}
 %il comando \nocite necessita di specificare quale voce non citata riportare
