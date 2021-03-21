@@ -23,7 +23,7 @@
 \titleformat{\section}          %bfseries dalle voci contrassegnate
 {\normalfont\Large\bfseries}{\thesection}{1em}{}         %%%qui
 \titleformat{\subsection}[runin]
-{\normalfont\large\itshape}{\normalfont\thesubsection}{1em}{}      %%%qui
+{\normalfont\large\itshape}{\normalfont\thesubsection}{1em}{}
 \titleformat{\subsubsection}[runin]
 {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
 \titleformat{\paragraph}[runin]
@@ -36,6 +36,11 @@
 \titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1em}
 \titlespacing*{\subparagraph}{\parindent}{3.25ex plus 1ex minus .2ex}{1em}
+%EXERGA/EPIGRAFI
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.8\textwidth}
+\setlength\epigraphrule{0pt}
+\renewcommand{\textflush}{flushepinormal}
 %GESTIONE ASPETTO DELLE CITAZIONI ESTESE
 \usepackage[nottoc]{tocbibind} %include la voce bibliografia nell'indice
 \usepackage[autostyle,italian=guillemets]{csquotes} %rende più semplice la gestione di bibtex e permette inoltre di citare cose estese
@@ -45,13 +50,15 @@
 \AtEndEnvironment{quote}{\vspace{-\topsep}}
 %GESTIONE BIBLIOGRAFIA
 %\usepackage{biblatex-chicago} %ottimo pacchetto, molto ricco ma anche complicato da settare
-\usepackage[backend=biber,bibstyle=authortitle, firstinits=true,citestyle=verbose-trad1]{biblatex}
+\usepackage[backend=biber,bibstyle=authortitle, giveninits=true,citestyle=verbose-trad1]{biblatex}
 \addbibresource{bibliography.bib} %specifica il file della bibliografia
 \renewcommand*{\newunitpunct}{\addcomma\space} %separa i campi con virgole e non con punti, come di default
 \renewcommand*{\revsdnamepunct}{} %rimuove la virgola tra nome e cognome dell'autore
 \renewcommand\mkbibnamefamily[1]{\textsc{#1}} %autori in maiuscoletto
+%CREAZIONE DI UN INDICE ANALITICO
+\usepackage[xindy]{imakeidx}
 %LINK: INTERNI ED ESTERNI AL DOCUMENTO
-%\usepackage{hyperref} %NB da caricare per ultimo, nel caso usare \phantomsection per la bibliografia
+\usepackage{hyperref} %NB da caricare per ultimo, nel caso usare \phantomsection per la bibliografia
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \input{titlepage} %inserisce il frontespizio
@@ -62,7 +69,7 @@
 %\thispagestyle{empty}
 
 \chapter*{Introduzione} %sospende la numerazione dei capitoli per la sezione
-\addcontentsline{toc}{chapter}{\textsc{Introduzione}}
+\addcontentsline{toc}{chapter}{Introduzione}
 \input{intro} %input permette il nesting, \include lo impedisce
 
 \chapter{Le radici del dibattito nelle scienze umane in Francia}
