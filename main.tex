@@ -6,23 +6,38 @@
 \usepackage{indentfirst} %rientro paragrafo
 \pagestyle{plain} %nessun heading o foot particolare
 \usepackage[a4paper,top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry} %impaginazione e margini documento
-%\usepackage{layaureo} %alternative layout, NECESSARIO A4PAPER IN DOCCLASS
+%\usepackage{layaureo} %alternative layout, NECESSARIO SPECIFICARE A4PAPER IN DOCCLASS
+
+%EXERGA/EPIGRAFI
+\usepackage{epigraph}
+\setlength\epigraphwidth{0.8\textwidth}
+\setlength\epigraphrule{0pt}
+\renewcommand{\textflush}{flushepinormal}
+
+\usepackage{indentfirst}
+\usepackage[normalem]{ulem}
+%\usepackage{parskip}
+%\setlength{\parindent}{15pt}
+%\hangindent=15pt
+%\setlength{\parskip}{1ex}
+
+
 %GESTIONE IMMAGINI E GRAFICHE
 \usepackage{graphicx, wrapfig} %gestione immagini e grafiche
-\graphicspath{  {./images/}  } %cartella delle immagini
+\graphicspath{  {./testimages/}  } %cartella delle immagini
 %GESTIONE TITOLI NEL SOMMARIO
 \usepackage{tocloft} %rimuove il grassetto dall'indice
 \renewcommand{\cfttoctitlefont}{\huge\centerline}
 \renewcommand{\cftchapfont}{\large}
 %GESTIONE TITOLI PARAGRAFI E SEZIONI
-\usepackage{titlesec} %le impostazioni default del package titlesec
+\usepackage{titlesec} %cambia le impostazioni di default dei titoli delle sezioni
+%NB queste impostazioni rispettano le linee guida d'ateneo
 %NB no punto finale nei titoli delle sezioni del corpo del testo
-
-\titleformat{\chapter}[display]
-{\normalfont\huge\bfseries\scshape\filcenter}{\thechapter}{20pt}{\Huge} %ho rimosso 
-\titleformat{\section}          %bfseries dalle voci contrassegnate
-{\normalfont\Large\bfseries}{\thesection}{1em}{}         %%%qui
-\titleformat{\subsection}[runin]
+\titleformat{\chapter}[display] %inserire "\chaptertitlename" per ripristinare la dicitura "capitolo" sopra il titolo del capitolo stesso.
+{\normalfont\huge\bfseries\scshape}{\thechapter}{20pt}{\Huge} 
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin] %runin fa del titolo un elemento inline
 {\normalfont\large\itshape}{\normalfont\thesubsection}{1em}{}
 \titleformat{\subsubsection}[runin]
 {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
@@ -36,11 +51,6 @@
 \titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1em}
 \titlespacing*{\subparagraph}{\parindent}{3.25ex plus 1ex minus .2ex}{1em}
-%EXERGA/EPIGRAFI
-\usepackage{epigraph}
-\setlength\epigraphwidth{0.8\textwidth}
-\setlength\epigraphrule{0pt}
-\renewcommand{\textflush}{flushepinormal}
 %GESTIONE ASPETTO DELLE CITAZIONI ESTESE
 \usepackage[nottoc]{tocbibind} %include la voce bibliografia nell'indice
 \usepackage[autostyle,italian=guillemets]{csquotes} %rende più semplice la gestione di bibtex e permette inoltre di citare cose estese
@@ -55,15 +65,13 @@
 \renewcommand*{\newunitpunct}{\addcomma\space} %separa i campi con virgole e non con punti, come di default
 \renewcommand*{\revsdnamepunct}{} %rimuove la virgola tra nome e cognome dell'autore
 \renewcommand\mkbibnamefamily[1]{\textsc{#1}} %autori in maiuscoletto
-%CREAZIONE DI UN INDICE ANALITICO
-\usepackage[xindy]{imakeidx}
 %LINK: INTERNI ED ESTERNI AL DOCUMENTO
 \usepackage{hyperref} %NB da caricare per ultimo, nel caso usare \phantomsection per la bibliografia
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 \input{titlepage} %inserisce il frontespizio
 %\thispagestyle{empty} %sospende la numerazione della pagina
-\phantomsection %inserisce l'indice nell'indice
+%\phantomsection %inserisce l'indice nell'indice
 \addcontentsline{toc}{chapter}{Indice}
 \tableofcontents %SOMMARIO
 %\thispagestyle{empty}
@@ -72,16 +80,16 @@
 \addcontentsline{toc}{chapter}{Introduzione}
 \input{intro} %input permette il nesting, \include lo impedisce
 
-\chapter{Le radici del dibattito nelle scienze umane in Francia}
 \input{ch1}
 
-\chapter{Ragione analitica e ragion dialettica}
 \input{ch2}
 
-\chapter{Alcuni eredi}
 \input{ch3}
 %\bibliographystyle{siam} %questo set di comandi esclude e rimpiazza DEL TUTTO i comandi definiti come da preambolo. In caso di modifica per tornare ai comandi standard, verificare di sostituire correttamente TUTTI i componenti, sia nel preambolo che nella coda del documento.
 %\bibliography{bibliography}
 %il comando \nocite necessita di specificare quale voce non citata riportare
-\printbibliography %inserisce le voci citate
+
+\chapter*{Bibliografia} %inserisce la bibliografia nell'indice
+\addcontentsline{toc}{chapter}{Bibliografia}
+\printbibliography[heading=none] %inserisce le voci citate, non crea una doppia intestazione per la bibliografia
 \end{document}
