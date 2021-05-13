@@ -1,4 +1,4 @@
-\documentclass[a4paper, 12pt, twoside,openany]{book}
+\documentclass[a4paper, 11pt, twoside,openany]{book}
 \usepackage[T1]{fontenc} %come sotto
 \usepackage[utf8]{inputenc} %aggiunge caratteri accentati
 \usepackage[italian]{babel} %lingua
@@ -16,11 +16,8 @@
 
 \usepackage{indentfirst}
 \usepackage[normalem]{ulem}
-%\usepackage{parskip}
-%\setlength{\parindent}{15pt}
-%\hangindent=15pt
-%\setlength{\parskip}{1ex}
 
+\usepackage{lettrine}
 
 %GESTIONE IMMAGINI E GRAFICHE
 \usepackage{graphicx, wrapfig} %gestione immagini e grafiche
@@ -56,8 +53,8 @@
 \usepackage[autostyle,italian=guillemets]{csquotes} %rende più semplice la gestione di bibtex e permette inoltre di citare cose estese
 %SAME
 \usepackage{etoolbox} %setta il carattere delle citazioni estese come più piccolo e rimuove il separatore verticale
-\AtBeginEnvironment{quote}{\vspace{-\topsep}\small}
-\AtEndEnvironment{quote}{\vspace{-\topsep}}
+%\AtBeginEnvironment{quote}{\vspace{-\topsep}\small}
+%\AtEndEnvironment{quote}{\vspace{-\topsep}}
 %GESTIONE BIBLIOGRAFIA
 %\usepackage{biblatex-chicago} %ottimo pacchetto, molto ricco ma anche complicato da settare
 \usepackage[backend=biber,bibstyle=authortitle, giveninits=true,citestyle=verbose-trad1]{biblatex}
@@ -76,8 +73,6 @@
 \tableofcontents %SOMMARIO
 %\thispagestyle{empty}
 
-\chapter*{Introduzione} %sospende la numerazione dei capitoli per la sezione
-\addcontentsline{toc}{chapter}{Introduzione}
 \input{intro} %input permette il nesting, \include lo impedisce
 
 \input{ch1}
